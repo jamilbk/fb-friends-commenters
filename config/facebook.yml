@@ -1,11 +1,11 @@
 # API keys are stored in the environment. This is generally more secure and 
 # keeps keys out of the repository, while still allowing deploy to heroku.
-#development:
-#  app_id:
-#  secret_key:
-#test:
-#  app_id:
-#  secret_key:
-#production:
-#  app_id:
-#  secret_key:
+development:
+  app_id:
+  secret_key:
+test:
+  app_id:
+  secret_key:
+production:
+  app_id:
+  secret_key:
