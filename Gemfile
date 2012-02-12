@@ -33,6 +33,8 @@ gem 'haml'
 gem 'haml-rails'
 gem 'koala'
 
+gem 'heroku'
+
 group :development, :test do
   gem 'rspec'
   gem 'rspec-rails'
