@@ -16,8 +16,12 @@ class FacebookController < ApplicationController
     @friends = current_user.friends
   end
 
-  def friends_posts
-    @friends_posts = current_user.friends_posts
+  def friends_comment_stats
+    @id = params[:id]
+    @stats = current_user.friends_comment_stats(@id)
+    respond_to do |format|
+      format.js
+    end
   end
 
   protected

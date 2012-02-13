@@ -1,0 +1,10 @@
+%table
+  %tr
+    %th From
+    %th Message
+  - @stats.each do |stat|
+    %tr
+      %td= stat['from']['name']
+      %td= stat['message']
+  
+  

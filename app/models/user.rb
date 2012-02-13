@@ -14,8 +14,13 @@ class User
     @friends ||= graph.get_connections(uid, 'friends')
   end
 
-  def friends_posts(friend_id = 208333)
-    @friends_posts ||= graph.get_connections(friend_id, 'posts', {:limit => 100})
+  def friends_comment_stats(id)
+    @posts ||= graph.get_connections(id, 'posts')
+    @comments = []
+    @posts.each do |post|
+      @comments += post['comments']['data'] if post['comments']['count'] != 0
+    end
+    @comments
   end
 
   def likes_by_category
