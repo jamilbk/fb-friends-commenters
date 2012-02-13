@@ -12,6 +12,14 @@ class FacebookController < ApplicationController
   def login
   end
 
+  def friends
+    @friends = current_user.friends
+  end
+
+  def friends_posts
+    @friends_posts = current_user.friends_posts
+  end
+
   protected
 
     def logged_in?
