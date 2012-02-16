@@ -2,17 +2,24 @@
 %html
   %head
     %title Wildfire Programming Challenge
-    = stylesheet_link_tag 'application'
+    = stylesheet_link_tag :all
     = javascript_include_tag :all
     = csrf_meta_tag
 
   %body
-    #header
-      = facebook_login_button('large')
-      %h1 WildFire Programming Challenge
-    #content
-      #fb-root
-      = yield
+    / used for bootstrap default
+    .container
+      .row
+        #header.span12
+          = facebook_login_button('large')
+          %h1 WildFire Programming Challenge
+          %p Click a friend's name from the list to display his/her comment stats
+      .row
+        #sidebar.span2
+          #fb-root
+          = yield
+        #content.span10
+          comment stats here
 
 :javascript
   window.fbAsyncInit = function() {

@@ -6,14 +6,10 @@ class FacebookController < ApplicationController
   helper_method :logged_in?, :current_user
   
   def index
-    @likes_by_category = current_user.likes_by_category
+    @friends = current_user.friends
   end
 
   def login
-  end
-
-  def friends
-    @friends = current_user.friends
   end
 
   def friends_comment_stats

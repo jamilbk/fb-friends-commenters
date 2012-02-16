@@ -1,1 +1,4 @@
-API keys stored in ENV rather than facebook.yml
+- API keys stored in ENV rather than facebook.yml
+- read_stream permission added for more friends' posts to show
+- AJAX chosen for simpler&quicker view updates
+

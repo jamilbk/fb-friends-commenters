@@ -1,7 +1,0 @@
-%h2 Your Friends:
-- @friends.each do |friend|
-  = friend['name']
-  = link_to 'show posts', {:action => :friends_comment_stats, :id => friend['id']}, :remote => true, :id => "link_"+friend['id']
-  =raw "<div id='click_#{friend['id']}'>content to update</div>"
-  <br />
-

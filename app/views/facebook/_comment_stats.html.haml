@@ -1,10 +1,12 @@
-%table
-  %tr
-    %th From
-    %th Message
-  - @stats.each do |stat|
+%table.table.table-striped
+  %thead
     %tr
-      %td= stat['from']['name']
-      %td= stat['message']
+      %th From
+      %th Message
+  %tbody
+    - @stats.each do |stat|
+      %tr
+        %td= stat['from']['name']
+        %td= stat['message']
   
   

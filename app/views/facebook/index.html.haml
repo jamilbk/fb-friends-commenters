@@ -1,6 +1,5 @@
-%h2 Your "likes":
-- @likes_by_category.each do |category, likes|
-  %h3= category
-  %ul
-    - likes.each do |like|
-      %li= like['name']
+%h3 Friends
+- @friends.each do |friend|
+  = link_to friend['name'], {:action => :friends_comment_stats, :id => friend['id']}, :remote => true
+  <br />
+
