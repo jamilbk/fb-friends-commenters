@@ -3,7 +3,7 @@ require 'spec_helper'
 describe User do
   before do
     @graph = mock('graph api')
-    @uid = 42
+    @uid = 100003527683805
     @user = User.new(@graph, @uid)
   end
 
@@ -11,34 +11,10 @@ describe User do
     before do
       @likes = [
         {
-          "name" => "The Office",
-          "category" => "Tv show",
-          "id" => "6092929747",
-          "created_time" => "2010-05-02T14:07:10+0000"
-        },
-        {
-          "name" => "Flight of the Conchords",
-          "category" => "Tv show",
-          "id" => "7585969235",
-          "created_time" => "2010-08-22T06:33:56+0000"
-        },
-        {
-          "name" => "Wildfire Interactive, Inc.",
-          "category" => "Product/service",
-          "id" => "36245452776",
-          "created_time" => "2010-06-03T18:35:54+0000"
-        },
-        {
-          "name" => "Facebook Platform",
-          "category" => "Product/service",
-          "id" => "19292868552",
-          "created_time" => "2010-05-02T14:07:10+0000"
-        },
-        {
-          "name" => "Twitter",
-          "category" => "Product/service",
-          "id" => "20865246992",
-          "created_time" => "2010-05-02T14:07:10+0000"
+          "name"=> "Opeth", 
+          "category"=> "Musician/band", 
+          "id"=> "7496603409", 
+          "created_time"=> "2012-02-16T12=>34=>56+0000"
         }
       ]
       @graph.should_receive(:get_connections).with(@uid, 'likes').once.and_return(@likes)
@@ -59,42 +35,54 @@ describe User do
     describe '#likes_by_category' do
       it 'should group by category and sort categories and names' do
         @user.likes_by_category.should == [
-          ["Product/service", [
+          ["Musician/band", [
             {
-              "name" => "Facebook Platform",
-              "category" => "Product/service",
-              "id" => "19292868552",
-              "created_time" => "2010-05-02T14:07:10+0000"
-            },
-            {
-              "name" => "Twitter",
-              "category" => "Product/service",
-              "id" => "20865246992",
-              "created_time" => "2010-05-02T14:07:10+0000"
-            },
-            {
-              "name" => "Wildfire Interactive, Inc.",
-              "category" => "Product/service",
-              "id" => "36245452776",
-              "created_time" => "2010-06-03T18:35:54+0000"
-            }
-          ]],
-          ["Tv show", [
-            {
-              "name" => "Flight of the Conchords",
-              "category" => "Tv show",
-              "id" => "7585969235",
-              "created_time" => "2010-08-22T06:33:56+0000"
-            },
-            {
-              "name" => "The Office",
-              "category" => "Tv show",
-              "id" => "6092929747",
-              "created_time" => "2010-05-02T14:07:10+0000"
+              "name"=> "Opeth", 
+              "category"=> "Musician/band", 
+              "id"=> "7496603409", 
+              "created_time"=> "2012-02-16T12=>34=>56+0000"
             }
           ]]
         ]
       end
     end
+  end
+
+  describe 'retrieving friends' do
+    before do
+      @friends = [
+        {
+          "name" => "Jamil Elie Bou Kheir",
+          "id" => "37510737"
+        }
+      ]
+      @graph.should_receive(:get_connections).with(@uid, 'friends').once.and_return(@friends)
+    end
+
+    describe '#friends' do
+      it 'should receive the friends via the graph api' do
+        @user.friends.should == @friends
+      end
+
+      it 'should memoize the result after the first call' do
+        friends1 = @user.friends
+        friends2 = @user.friends
+        friends2.should equal(friends1)
+      end
+    end
+
+  end
+  describe 'retrieving friends names' do
+    before do
+      @friends_name = "Jamil Elie Bou Kheir"
+      @graph.should_receive(:get_object).with(37510737).once.and_return(@friends_name)
+    end
+
+    describe '#friends_name(id)' do
+      it 'should receive the friends name via the graph api given the friend\'s id' do
+        @user.friends_name(37510737).should == @friends_name
+      end
+    end
+
   end
 end

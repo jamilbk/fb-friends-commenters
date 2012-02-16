@@ -5,6 +5,10 @@ class FacebookController < ApplicationController
 
   helper_method :logged_in?, :current_user
   
+  def likes
+    @likes_by_category = current_user.likes_by_category
+  end
+
   def index
     @friends = current_user.friends
   end
@@ -40,7 +44,7 @@ class FacebookController < ApplicationController
     def facebook_auth
       @oauth = Koala::Facebook::OAuth.new(ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_SECRET_KEY'])
       if fb_user_info = @oauth.get_user_info_from_cookie(request.cookies)
-        @graph = Koala::Facebook::GraphAPI.new(fb_user_info['access_token'])
+        @graph = Koala::Facebook::API.new(fb_user_info['access_token'])
         @user = User.new(@graph, fb_user_info['user_id'])
       end
     end
