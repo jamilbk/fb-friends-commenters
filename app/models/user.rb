@@ -15,7 +15,7 @@ class User
   end
 
   def friends_name(id)
-    @friends_name ||= graph.get_object(id)['name']
+    @friends_name ||= graph.get_object(id)
   end
 
   def friends_comment_stats(id)
