@@ -16,11 +16,17 @@ class User
 
   def friends_name(id)
     @friends_name ||= graph.get_object(id)
+    # sometimes objects returned are only names
+    if @friends_name['name']
+      @friends_name['name']
+    else
+      @friends_name
+    end
   end
 
   def friends_comment_stats(id)
     @feed ||= graph.get_connections(id, 'feed', :limit => 200)
-    stats_for_feed(@feed)
+    @stats ||= stats_for_feed(@feed)
   end
 
   def likes_by_category
@@ -30,7 +36,8 @@ class User
   protected
 
     def stats_for_feed(feed)
-      @stats = {}
+      return nil if feed.nil?
+      stats = {}
       @feed.each do |story|
         comments = story['comments']['data']
         # call me crazy, but i've noticed the "count" value reported by FB is
@@ -39,14 +46,14 @@ class User
           comments.each do |comment|
             id = comment['from']['id']
             name = comment['from']['name']
-            if @stats.has_key? id
-              @stats[id][:count] += 1
+            if stats.has_key? id
+              stats[id][:count] += 1
             else
-              @stats[id] = {:name => name, :count => 1}
+              stats[id] = {:name => name, :count => 1}
             end
           end
         end
       end
-      @stats.sort {|a,b| b[1][:count] <=> a[1][:count] }
+      stats.sort {|a,b| b[1][:count] <=> a[1][:count] }
     end
 end

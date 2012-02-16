@@ -70,8 +70,8 @@ describe User do
         friends2.should equal(friends1)
       end
     end
-
   end
+
   describe 'retrieving friends names' do
     before do
       @friends_name = "Jamil Elie Bou Kheir"
@@ -83,6 +83,17 @@ describe User do
         @user.friends_name(37510737).should == @friends_name
       end
     end
+  end
 
+  # this information is highly dynamic and bound to differ on an hourly basis.
+  # checking for non-empty results only
+  describe 'retrieving friends comment stats' do
+    before do
+      @graph.should_receive(:get_connections).with(@uid, 'feed', :limit => 200).once.and_return(@stats)
+    end
+    
+    it 'should not have empty comments' do
+      @user.friends_comment_stats(100003527683805).should != nil
+    end
   end
 end

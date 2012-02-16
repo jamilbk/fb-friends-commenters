@@ -1,2 +1,17 @@
-Use this README file to introduce your application and point to useful places in the API for learning more.
-Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+I chose to store the API keys in environment variables rather than
+facebook.yml. This keeps the information out of the repo while still
+allowing deployment to heroku, keeping them more secure. While most friends'
+posts showed with basic privs, I noticed that granting read_stream privs gave
+access to many more comments so I added this to :scope for the login button.
+The interface is a simple AJAX call with an updateable area. While this took
+a little longer to implement, I think it makes more sense in this case since
+the user may want to quickly skim through his/her friends' stats without
+worrying about the browser forward/back button or page reloads.
+
+That said, there are many more things that could be done to improve this app.
+Foremost, I'd like to write some more robust Unit tests since facebook data
+is such a highly volatile resource. Second, I would add functionality to expand
+people in the ranks table, showing their comments. After that I'd probably add
+more interesting measurements to rank your friends comments, like perhaps
+assigning more weight to recent comments. This app just pulls the most recent
+200 and ranks by total count.
