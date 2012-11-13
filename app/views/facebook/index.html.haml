@@ -1,5 +1,5 @@
 %h3 Friends
 - @friends.each do |friend|
-  = link_to friend['name'], {:action => :friends_comment_stats, :id => friend['id']}, :remote => true
+  = link_to friend['name'], {:action => :friends_comment_stats, :id => friend['id']}, :remote => true, class: 'friend'
   <br />
 
