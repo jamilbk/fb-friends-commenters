@@ -2,6 +2,6 @@
 
 jQuery(window).ready(function () {
   $('.friend').click(function () {
-    $('#content').html("<progress>LOADING...</progress>");
+    $('#content').html("<div id='progress'><progress>LOADING...</progress></div>");
   });
 });
