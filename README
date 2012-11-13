@@ -1,12 +1,3 @@
-Wildfire Programming Challenge
-==============================
+Find Comment Stats for Your Friends
 
-This app serves as the basis for programming challenges involving the Facebook
-Graph. In order to run the app locally:
-
-1. Set up a new Facebook app.
-2. Copy config/facebook.yml.example to config/facebook.yml and copy the id and
-   secret key from your new Facebook app.
-3. Run your Rails app.
-
-That's it!
+This app is a simple exercise in using the Facebook Open Graph. For each of your friends, it simply displays their top commenters, ranked by number of posts (most to least).
